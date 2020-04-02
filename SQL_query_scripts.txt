@@ -1,0 +1,79 @@
+# Query for default country table:  
+# Output: country, total # of attacks, avg # of attack/region, # of city attacked 
+
+
+        SELECT AG.country, SUM(AG.n_attack), AVG(AG.n_attack), COUNT(DISTINCT AG.city) 
+        FROM 
+            (SELECT r.country, r.city, SUM(f.num_attack) as n_attack 
+            FROM region AS r, fact AS f 
+            WHERE r.region_id=f.region_id GROUP BY r.country, r.city) AS AG 
+        GROUP BY AG.country 
+        ORDER BY SUM(AG.n_attack) DESC 
+ 
+# Query for frontend city table:  
+# Output: city, # of attacks 
+
+        SELECT r.country, r.city, SUM(f.num_attack) 
+        FROM region AS r, fact AS f 
+        WHERE r.region_id=f.region_id 
+        GROUP BY r.country, r.city 
+        ORDER BY SUM(f.num_attack) DESC
+
+# Generic query for all the filters:  
+# Output: specific attack event: date, weapon, attack, location, everything in fact table 
+
+#Date
+
+        SELECT ConcatDate.dt, ConcatDate.n_attack 
+        FROM 
+            (SELECT CAST(CONCAT(d.iyear, "-", d.imonth, "-", d.iday) AS datetime) as dt, SUM(f.num_attack) as n_attack 
+            FROM date as d, fact as f 
+            WHERE f.date_id=d.date_id 
+            GROUP BY  CAST(CONCAT(d.iyear, "-", d.imonth, "-", d.iday) AS datetime) ) AS ConcatDate 
+        WHERE ConcatDate.dt > CAST("1993-1-1" AS datetime)   #start date
+        AND ConcatDate.dt < CAST("1994-1-1" AS datetime) 	#end date
+
+#weapon
+
+        SELECT w.weapontype, w.weapsubtype, SUM(f.num_attack) 
+        FROM weapon as w, fact as f 
+        WHERE w.weapon_id=f.weapon_id 
+        GROUP BY w.weapontype, w.weapsubtype 
+        ORDER BY SUM(f.num_attack) DESC
+
+#attack
+        SELECT a.attack_type, SUM(f.num_attack) 
+        FROM attack AS a, fact AS f 
+        WHERE f.attack_id=a.attack_id 
+        GROUP BY a.attack_type 
+        ORDER BY SUM(f.num_attack) DESC
+
+#target
+        SELECT t.target_type, SUM(f.num_attack) 
+        FROM target AS t, fact AS f 
+        WHERE t.target_id=f.target_id 
+        GROUP BY t.target_type 
+        ORDER BY SUM(f.num_attack) DESC
+
+#gname
+        SELECT g.gname_txt, g.gsubname, SUM(f.num_attack) 
+        FROM gname as g, fact as f 
+        WHERE g.gname_id=f.gname_id 
+        GROUP BY g.gname_txt, g.gsubname 
+        ORDER BY SUM(f.num_attack) DESC 
+
+#claimed
+        SELECT claimed, SUM(num_attack) 
+        FROM fact 
+        GROUP BY claimed
+
+#success
+        SELECT success, SUM(num_attack) 
+        FROM fact 
+        GROUP BY success
+
+#ishostkid
+        SELECT ishostkid, SUM(num_attack) 
+        FROM fact 
+        GROUP BY ishostkid
+
