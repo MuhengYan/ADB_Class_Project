@@ -13,17 +13,19 @@ require 'config.php';
         FROM region AS r, fact AS f 
         WHERE r.region_id=f.region_id GROUP BY r.country, r.city) AS AG 
     GROUP BY AG.country 
-    ORDER BY SUM(AG.n_attack) DESC ";
-	
-	$result_show_country_table = $conn->query($sql_country_table);
+    ORDER BY SUM(AG.n_attack) DESC";
+
+
+    $result_show_country_table = $conn->query($sql_country_table);
+
 	if($result_show_country_table)
 		{
             echo "<table class='countrytable' border=1px>";
             echo "<tr>";
             echo "<td>Country</td><td>Total Number of Attacks</td><td>Number of Cities Attacked</td><td>Average Number of Attack Per City</td>";
             echo "</tr>";
-			while($row = $result_show_products->fetch_assoc())
-			{
+			while($row = $result_show_country_table->fetch_assoc())
+			{  
                 echo "<td>".$row['country']."</td>";
                 echo "<td>".$row['sum_attack']."</td>";
                 echo "<td>".$row['avg_attack']."</td>";
