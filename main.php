@@ -1,9 +1,11 @@
 <?php 
 
 session_start();
+require 'header.php';
 require 'config.php';
 
 ?>
+<button type="button" class="btn"><a href="filter.php">Filter Attacks</a></button>
 
 <?php
 
@@ -18,8 +20,10 @@ require 'config.php';
 
     $result_show_country_table = $conn->query($sql_country_table);
 
-	if($result_show_country_table)
+    if($result_show_country_table)
+        
 		{
+            
             echo "<table class='countrytable' border=1px>";
             echo "<tr>";
             echo "<td>Country</td><td>Total Number of Attacks</td><td>Number of Cities Attacked</td><td>Average Number of Attack Per City</td>";
@@ -36,4 +40,8 @@ require 'config.php';
 
 		}
 
+?>
+
+<?php
+require 'footer.php'
 ?>
