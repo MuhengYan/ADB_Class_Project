@@ -45,6 +45,19 @@ CREATE TABLE target (
     UNIQUE KEY (weapontype, weapsubtype) 
 );
 
+CREATE TABLE fact (
+    date_id INT,
+    region_id INT,
+    attack_id INT,
+    target_id INT,
+    gname_id INT,
+    weapon_id INT,
+    success INT,
+    claimed INT,
+    ishostkid INT,
+    num_attack INT
+);
+
 ALTER TABLE fact
 ADD FOREIGN KEY (attack_id) REFERENCES attack(attack_id),  
 ADD FOREIGN KEY (date_id) REFERENCES date(date_id),
