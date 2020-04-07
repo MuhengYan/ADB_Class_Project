@@ -26,7 +26,7 @@ require 'config.php';
             echo "</tr>";
 			while($row = $result_show_country_table->fetch_assoc())
 			{  
-                echo "<td>".$row['country']."</td>";
+                echo "<td><a href='country.php?id=".$row['country']."'>".$row['country']."</a></td>";
                 echo "<td>".$row['sum_attack']."</td>";
                 echo "<td>".$row['avg_attack']."</td>";
                 echo "<td>".$row['count_city']."</td>";
