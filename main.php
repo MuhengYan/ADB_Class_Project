@@ -12,7 +12,6 @@ require 'config.php';
 <p>For more information on the specifics of each attack, click below to search for attacks by date, region, target, attack type, weapon type, and gang name.</p>
 <button type="button" class="btn"><a href="filter.php">Search</a></button> 
 
-
 <?php
 
 	$sql_country_table = "SELECT AG.country, SUM(AG.n_attack) AS sum_attack, AVG(AG.n_attack) as avg_attack, COUNT(DISTINCT AG.city) as count_city

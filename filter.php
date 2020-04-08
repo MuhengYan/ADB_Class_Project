@@ -8,7 +8,26 @@ require 'config.php';
 ?>
 <button type="button" class="btn"><a href="main.php">Back to homepage</a></button><br>
 
-<br><h3>Search Terrorism Attacks</h3><br>
+<br>
+<h3>List Number of Attacks by Entity  </h3>
+<form name="bycategory" action="filter.php?action=bycategory" method="POST">
+<div class="form-group">
+<label for="cars">Select Entity</label>
+<select name="category">
+            <option value="Date">Date</option>
+            <option value="Attack Type">Attack Type</option>
+            <option value="Region">Region of Attack</option>
+            <option value="Target">Target</option>
+            <option value="Weapon Type">Weapon Type</option>
+            <option value="Gang Name">Gang Name</option>
+</select>
+</div>
+<input class="btn btn-primary" type="submit" value="Search"><br>
+</form>
+
+
+<br><h3>Search For Specific Terrorism Attacks</h3><br>
+
 <form name="search" action="filter.php?action=search" method="POST">
 <div class="form-group">
 Date From: <input type="date" name="startdate" min="1993-01-01" max="1993-12-31">
@@ -33,8 +52,86 @@ Gang Name: <input type="text" name="gname"><br>
 <input class="btn btn-primary" type="submit" value="Search"><br>
 </form><br>
 
+
+
 <?php
-if ($_GET['action'] == 'search') {
+
+if ($_GET['action'] == 'bycategory') {
+    $_category = $_POST['category'];   
+    $_sql=""; 
+
+    if($_category == 'Date'){
+        $_sql = "SELECT d.dt as class, SUM(f.num_attack) as num_attack FROM fact as f, (SELECT date_id, CAST(CONCAT(iyear, '-', imonth, '-', iday) AS date) as dt FROM date) as d
+        WHERE f.date_id = d.date_id
+        GROUP BY d.dt
+        ORDER BY num_attack DESC";
+    }
+    else if($_category == 'Attack Type'){
+        $_sql = "SELECT a.attack_type as class, SUM(f.num_attack) as num_attack FROM fact as f, attack as a
+        WHERE f.attack_id = a.attack_id
+        GROUP BY a.attack_type
+        ORDER BY num_attack DESC";
+    }
+    
+    else if($_category == 'Region'){
+        $_sql = "SELECT r.region as class, SUM(f.num_attack) as num_attack FROM fact as f, region as r
+        WHERE f.region_id = r.region_id
+        GROUP BY r.region
+        ORDER BY num_attack DESC";
+    }
+
+    else if($_category == 'Target'){
+        $_sql = "SELECT t.target_type as class, SUM(f.num_attack) as num_attack FROM fact as f, target as t
+        WHERE f.target_id = t.target_id
+        GROUP BY t.target_type
+        ORDER BY num_attack DESC";
+    }
+
+    else if($_category == 'Weapon Type'){
+        $_sql = "SELECT w.weapontype as class, SUM(f.num_attack) as num_attack FROM fact as f, weapon as w
+        WHERE f.weapon_id = w.weapon_id
+        GROUP BY w.weapontype
+        ORDER BY num_attack DESC";
+    }
+
+    else if($_category == 'Gang Name'){
+        $_sql = "SELECT g.gname as class, SUM(f.num_attack) as num_attack FROM fact as f, gname as g
+        WHERE f.gname_id = g.gname_id
+        GROUP BY g.gname
+        ORDER BY num_attack DESC";
+    }
+
+    $result = $conn->query($_sql);
+
+    if($result)
+    { 
+        echo "<h4> Search By: ".$_category;
+        $rowcount=mysqli_num_rows($result);
+
+        echo "<br><h4>".$rowcount." Results Returned</h4>";
+        echo "<table class='table' border=1px>";
+        echo "<thead class='thead-dark'><tr>";
+        echo "<th>".$_category."</th>";
+        echo "<th>Total # of Attacks</th>";
+        echo "</tr></thead><tbody>";
+
+
+        while($row = $result->fetch_assoc())
+        {  
+
+            echo "<td>".$row['class']."</td>";
+            echo "<td>".$row['num_attack']."</td>";
+            echo "</tr>";
+        }
+            echo "</tbody></table> <br>";
+
+    }
+
+
+
+}
+
+else if ($_GET['action'] == 'search') {
     $_startdate = $_POST["startdate"];
     $_enddate = $_POST["enddate"];
     $_weapon = $_POST["weapon"];

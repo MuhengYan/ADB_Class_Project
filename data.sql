@@ -65,3 +65,6 @@ ADD FOREIGN KEY (gname_id) REFERENCES gname(gname_id),
 ADD FOREIGN KEY (region_id) REFERENCES region(region_id),  
 ADD FOREIGN KEY (target_id) REFERENCES target(target_id),  
 ADD FOREIGN KEY (weapon_id) REFERENCES weapon(weapon_id);  
+
+
+
