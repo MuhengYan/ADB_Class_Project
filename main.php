@@ -31,19 +31,22 @@ require 'config.php';
 		{
             echo "<br><br> <h4></h4>";
 
-            echo "<table class='countrytable' border=1px>";
-            echo "<tr class='heading'>";
-            echo "<td>Country</td><td>Total Number of Attacks</td><td>Number of Cities Attacked</td><td>Average Number of Attack Per City</td>";
-            echo "</tr>";
+            echo "<table class='table' border=1px>";
+            echo "<thead class='thead-dark'><tr>";
+            echo "<th> Country </th>";
+            echo "<th> Total Number of Attacks </th>";
+            echo "<th> Number of Cities Attacked </th>";
+            echo"<th> Average Number of Attack Per City </th>";
+            echo "</tr></thead><tbody>";
 			while($row = $result_show_country_table->fetch_assoc())
 			{  
                 echo "<td><a href='country.php?id=".$row['country']."'>".$row['country']."</a></td>";
-                echo "<td>".$row['sum_attack']."</td>";
-                echo "<td>".$row['count_city']."</td>";
-                echo "<td>".$row['avg_attack']."</td>";
+                echo "<td> ".$row['sum_attack']." </td>";
+                echo "<td> ".$row['count_city']." </td>";
+                echo "<td> ".$row['avg_attack']." </td>";
                 echo "</tr>";
             }
-            echo "</table>";
+            echo "</tbody></table>";
 
 		}
 

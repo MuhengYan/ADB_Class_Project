@@ -94,23 +94,23 @@ if ($_GET['action'] == 'search') {
         if($result_search)
         { 
             $rowcount=mysqli_num_rows($result_search);
-            echo "<br><h4>".$rowcount." Attacks Returned</h4>";
+            echo "<br><h4>".$rowcount." Results Returned</h4>";
             
 
-            echo "<table class='filtertable' border=1px>";
-            echo "<tr class='heading'>";
-            echo "<td>Date</td>";
-            echo "<td>Region</td>";
-            echo "<td>Country</td>";
-            echo "<td>City</td>";
-            echo "<td>Target</td>";
-            echo "<td>Attack Type</td>";
-            echo "<td>Weapon Type</td>";
-            echo "<td>Gang Name</td>";
-            echo "<td>Success</td>";
-            echo "<td># of Attacks</td>";
+            echo "<table class='table' border=1px>";
+            echo "<thead class='thead-dark'><tr>";
+            echo "<th>Date</th>";
+            echo "<th>Region</th>";
+            echo "<th>Country</th>";
+            echo "<th>City</th>";
+            echo "<th>Target</th>";
+            echo "<th>Attack Type</th>";
+            echo "<th>Weapon Type</th>";
+            echo "<th>Gang Name</th>";
+            echo "<th>Success</th>";
+            echo "<th># of Attacks</th>";
 
-            echo "</tr>";
+            echo "</tr></thead><tbody>";
 			while($row = $result_search->fetch_assoc())
 			{  
                 echo "<td>".$row['dt']."</td>";
@@ -130,7 +130,7 @@ if ($_GET['action'] == 'search') {
                 echo "<td>".$row['num_attack']."</td>";
                 echo "</tr>";
             }
-            echo "</table> <br>";
+            echo "</tbody></table> <br>";
 
         }   
 }
