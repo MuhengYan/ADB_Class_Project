@@ -5,7 +5,13 @@ require 'header.php';
 require 'config.php';
 
 ?>
-<button type="button" class="btn"><a href="filter.php">Filter Attacks</a></button>
+
+<br>
+<h3>Confirmed Cases of Terrorist Attacks in Year 1993 by Country</h3>
+<p>There are 709 terrorist attacks reported in 63 countries in the year 1993.</p><br>
+<p>For more information on the specifics of each attack, click below to search for attacks by date, region, target, attack type, weapon type, and gang name.</p>
+<button type="button" class="btn"><a href="filter.php">Search</a></button> 
+
 
 <?php
 
@@ -23,17 +29,18 @@ require 'config.php';
     if($result_show_country_table)
         
 		{
-            
+            echo "<br><br> <h4></h4>";
+
             echo "<table class='countrytable' border=1px>";
-            echo "<tr>";
+            echo "<tr class='heading'>";
             echo "<td>Country</td><td>Total Number of Attacks</td><td>Number of Cities Attacked</td><td>Average Number of Attack Per City</td>";
             echo "</tr>";
 			while($row = $result_show_country_table->fetch_assoc())
 			{  
                 echo "<td><a href='country.php?id=".$row['country']."'>".$row['country']."</a></td>";
                 echo "<td>".$row['sum_attack']."</td>";
-                echo "<td>".$row['avg_attack']."</td>";
                 echo "<td>".$row['count_city']."</td>";
+                echo "<td>".$row['avg_attack']."</td>";
                 echo "</tr>";
             }
             echo "</table>";

@@ -15,5 +15,11 @@
 	</head>
 	<body>
 
-        <div class="container">
+        <div class="container"><br>
+        <div class="jumbotron"> <h1 class="text-center">Terrorism-O-Meter</h1>        
+        </div>
+        
+       
+        
+        
 
