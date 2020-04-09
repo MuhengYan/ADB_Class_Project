@@ -14,7 +14,7 @@ require 'config.php';
 	$country = $_GET['id'];
 	echo "$country";
 
-	$sql_country_details = "SELECT r.city as r_city, SUM(f.num_attack) as num_attack
+	$sql_country_details = "SELECT r.city as r_city, SUM(f.num_attack) as num_attack, r.country as country
 			FROM region AS r, fact AS f 
 			WHERE r.region_id=f.region_id and r.country = '".$country."'
 			GROUP BY r.country, r.city 
@@ -31,7 +31,7 @@ require 'config.php';
 		echo "</tr>";
 		while($row = $results_show_table->fetch_assoc())
 		{
-			echo "<td>".$row['r_city']."</td>";
+			echo "<td><a href='city.php?id=".$row['country']."&city=".$row['r_city']."'>".$row['r_city']."</a></td>";
 			echo "<td>".$row['num_attack']."</td>";
 			echo "</tr>";
 		}
