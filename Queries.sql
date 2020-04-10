@@ -61,3 +61,16 @@ SELECT * FROM fact as f, attack as a, gname as g, region as r, target as t, weap
     AND a.attack_type = '$_attack'                  --Only use if given input
     AND w.weapontype = '$_weapon'                   --Only use if given input
     AND g.gname = '$_gname'                         --Only use if given input
+
+--City-specific group by date
+select d.imonth as month, d.iday as day, d.iyear as year, num_attack as num_attack from 
+    (select r.country as country, r.city as city, f.date_id as date_id,
+        f.num_attack as num_attack from fact as f, region as r where r.region_id = f.region_id and r.country = '".$country."' and r.city = '".$city."') as subquery,
+         date as d where subquery.date_id = d.date_id
+
+--Country-specific data to list number of attacks by city in each country
+SELECT r.city as r_city, SUM(f.num_attack) as num_attack
+            FROM region AS r, fact AS f 
+            WHERE r.region_id=f.region_id and r.country = '".$country."'
+            GROUP BY r.country, r.city 
+            ORDER BY SUM(f.num_attack) DESC
