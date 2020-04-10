@@ -15,7 +15,7 @@ require 'config.php';
 <h6>For cool time and map visualizations, click below </h6>
 <button type="button" class="btn"><a href="https://public.tableau.com/profile/chenhao.you#!/vizhome/jil252ADBFinalProject1/Dashboard1?publish=yes">View Visualizations</a></button> 
 <br>
-<br><h4>Confirmed Cases of Terrorist Attacks by Country</h4>
+<br><h4>Confirmed Cases of Terrorist Attacks by Country in Year 1993</h4>
 <?php
 
 	$sql_country_table = "SELECT AG.country, SUM(AG.n_attack) AS sum_attack, AVG(AG.n_attack) as avg_attack, COUNT(DISTINCT AG.city) as count_city
