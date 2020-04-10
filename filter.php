@@ -9,48 +9,53 @@ require 'config.php';
 <button type="button" class="btn"><a href="main.php">Back to homepage</a></button><br>
 
 <br>
-<h3>List Number of Attacks by Entity  </h3>
-<form name="bycategory" action="filter.php?action=bycategory" method="POST">
-<div class="form-group">
-<label for="cars">Select Entity</label>
-<select name="category">
-            <option value="Date">Date</option>
-            <option value="Attack Type">Attack Type</option>
-            <option value="Region">Region of Attack</option>
-            <option value="Target">Target</option>
-            <option value="Weapon Type">Weapon Type</option>
-            <option value="Gang Name">Gang Name</option>
-</select>
-</div>
-<input class="btn btn-primary" type="submit" value="Search"><br>
-</form>
+<div class="row">
+    <div class="col">
+    <h3>Search For Specific Terrorism Attacks</h3><br>
 
+    <form name="search" action="filter.php?action=search" method="POST">
+    <div class="form-group">
+    Date From: <input type="date" name="startdate" min="1993-01-01" max="1993-12-31">
+    To: <input type="date" name="enddate"  placeholder=" Select Date" min="1993-01-01" max="1993-12-31">
+    <br>
+    </div>
+    <div class="form-group">
+    Region of Attack: <input type="text" name="region"><br>
+    </div>
+    <div class="form-group">
+    Target: <input type="text" name="target"><br>
+    </div>
+    <div class="form-group">
+    Attack Type: <input type="text" name="attack"><br>
+    </div>
+    <div class="form-group">
+    Weapon Type: <input type="text" name="weapon"><br>
+    </div>
+    <div class="form-group">
+    Gang Name: <input type="text" name="gname"><br>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Search"><br>
+    </form><br>
+    </div>
 
-<br><h3>Search For Specific Terrorism Attacks</h3><br>
-
-<form name="search" action="filter.php?action=search" method="POST">
-<div class="form-group">
-Date From: <input type="date" name="startdate" min="1993-01-01" max="1993-12-31">
-To: <input type="date" name="enddate"  placeholder=" Select Date" min="1993-01-01" max="1993-12-31">
-<br>
+    <div class="col">
+    <h3>List Number of Attacks by Category</h3>
+    <form name="bycategory" action="filter.php?action=bycategory" method="POST">
+    <div class="form-group">
+    <label for="cars">Select Category</label>
+    <select name="category">
+                <option value="Date">Date</option>
+                <option value="Attack Type">Attack Type</option>
+                <option value="Region">Region of Attack</option>
+                <option value="Target">Target</option>
+                <option value="Weapon Type">Weapon Type</option>
+                <option value="Gang Name">Gang Name</option>
+    </select>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Search"><br>
+    </form>
+    </div>
 </div>
-<div class="form-group">
-Region of Attack: <input type="text" name="region"><br>
-</div>
-<div class="form-group">
-Target: <input type="text" name="target"><br>
-</div>
-<div class="form-group">
-Attack Type: <input type="text" name="attack"><br>
-</div>
-<div class="form-group">
-Weapon Type: <input type="text" name="weapon"><br>
-</div>
-<div class="form-group">
-Gang Name: <input type="text" name="gname"><br>
-</div>
-<input class="btn btn-primary" type="submit" value="Search"><br>
-</form><br>
 
 
 

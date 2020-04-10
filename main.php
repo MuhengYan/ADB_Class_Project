@@ -7,11 +7,15 @@ require 'config.php';
 ?>
 
 <br>
-<h3>Confirmed Cases of Terrorist Attacks in Year 1993 by Country</h3>
-<p>There are 709 terrorist attacks reported in 63 countries in the year 1993.</p><br>
-<p>For more information on the specifics of each attack, click below to search for attacks by date, region, target, attack type, weapon type, and gang name.</p>
-<button type="button" class="btn"><a href="filter.php">Search</a></button> 
+<h3>Your guide to world wide terrosist attack statistics</h3><br>
 
+<h6>For more information on the specifics of each attack, click below to search for attacks by date, region, target, attack type, weapon type, and gang name.</h6>
+<button type="button" class="btn"><a href="filter.php">Search</a></button> 
+<br><br>
+<h6>For cool time and map visualizations, click below </h6>
+<button type="button" class="btn"><a href="https://public.tableau.com/profile/chenhao.you#!/vizhome/jil252ADBFinalProject1/Dashboard1?publish=yes">View Visualizations</a></button> 
+<br>
+<br><h4>Confirmed Cases of Terrorist Attacks by Country</h4>
 <?php
 
 	$sql_country_table = "SELECT AG.country, SUM(AG.n_attack) AS sum_attack, AVG(AG.n_attack) as avg_attack, COUNT(DISTINCT AG.city) as count_city
@@ -28,7 +32,6 @@ require 'config.php';
     if($result_show_country_table)
         
 		{
-            echo "<br><br> <h4></h4>";
 
             echo "<table class='table' border=1px>";
             echo "<thead class='thead-dark'><tr>";
