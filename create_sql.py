@@ -8,10 +8,10 @@ import tqdm
 import math
 
 mydb = mysql.connector.connect(
-        host="YOUR_HOST",
-        user="USER_NAME",
-        passwd="PASSWORD",
-        database="DB_NAME"
+        host="localhost",
+        user="root",
+        passwd="mysql",
+        database="terrorismometer"
      )
 
 

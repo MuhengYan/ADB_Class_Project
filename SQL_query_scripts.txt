@@ -77,3 +77,19 @@
         FROM fact 
         GROUP BY ishostkid
 
+#Generic Search SQL
+        SELECT * FROM fact as f, attack as a, gname as g, region as r, target as t, weapon as w, 
+        (SELECT date_id, CAST(CONCAT(iyear, '-', imonth, '-', iday) AS date) as dt FROM date) as d
+        WHERE f.attack_id = a.attack_id
+        AND f.date_id = d.date_id
+        AND f.gname_id = g.gname_id
+        AND f.region_id = r.region_id
+        AND f.target_id = t.target_id
+        AND f.weapon_id = w.weapon_id
+        AND d.dt BETWEEN '$_startdate' AND '$_enddate' #from user inputs
+        AND r.region = '$_region'
+        AND t.target_type = '$_target'
+        AND a.attack_type = '$_attack'
+        AND w.weapontype = '$_weapon'
+        AND g.gname = '$_gname'
+
