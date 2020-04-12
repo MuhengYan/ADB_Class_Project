@@ -204,7 +204,7 @@ else if ($_GET['action'] == 'search') {
             echo "<th>Date</th>";
             echo "<th>Region</th>";
             echo "<th>Country</th>";
-            echo "<th>City</th>";
+            echo "<th>City, State</th>";
             echo "<th>Target</th>";
             echo "<th>Attack Type</th>";
             echo "<th>Weapon Type</th>";
@@ -218,7 +218,7 @@ else if ($_GET['action'] == 'search') {
                 echo "<td>".$row['dt']."</td>";
                 echo "<td>".$row['region']."</td>";
                 echo "<td>".$row['country']."</td>";
-                echo "<td>".$row['city']."</td>";
+                echo "<td>".$row['city'].", ".$row['provstate']."</td>";
                 echo "<td>".$row['target_type']."</td>";
                 echo "<td>".$row['attack_type']."</td>";
                 echo "<td>".$row['weapontype']."</td>";

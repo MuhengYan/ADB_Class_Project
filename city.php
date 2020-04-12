@@ -16,7 +16,7 @@ require 'config.php';
 	echo "<button type='button' class='btn'><a href='country.php?id=".$country."'> Back to ".$country."</a></button>";
 	echo "<br>";
 
-	echo "<br><h4>Country: ".$city."</h4><br>";
+	echo "<br><h4>City: ".$city."</h4><br>";
 
 	$sql_all_attacks = "select d.imonth as month, d.iday as day, d.iyear as year, num_attack as num_attack from (
 	select r.country as country, r.city as city, f.date_id as date_id, f.num_attack as num_attack from fact as f, region as r where r.region_id = f.region_id and r.country = '".$country."' and r.city = '".$city."') as subquery, date as d where subquery.date_id = d.date_id";
