@@ -1,0 +1,325 @@
+{
+  "INT_ANY": {
+    "type": "long"
+  },
+  "INT_IDEO": {
+    "type": "long"
+  },
+  "INT_LOG": {
+    "type": "long"
+  },
+  "INT_MISC": {
+    "type": "long"
+  },
+  "addnotes": {
+    "type": "text"
+  },
+  "alternative": {
+    "type": "long"
+  },
+  "alternative_txt": {
+    "type": "keyword"
+  },
+  "approxdate": {
+    "type": "keyword"
+  },
+  "attacktype1": {
+    "type": "long"
+  },
+  "attacktype1_txt": {
+    "type": "keyword"
+  },
+  "attacktype2": {
+    "type": "long"
+  },
+  "attacktype2_txt": {
+    "type": "keyword"
+  },
+  "city": {
+    "type": "keyword"
+  },
+  "claim2": {
+    "type": "long"
+  },
+  "claimed": {
+    "type": "long"
+  },
+  "claimmode": {
+    "type": "long"
+  },
+  "claimmode_txt": {
+    "type": "keyword"
+  },
+  "corp1": {
+    "type": "text"
+  },
+  "corp2": {
+    "type": "keyword"
+  },
+  "country": {
+    "type": "long"
+  },
+  "country_txt": {
+    "type": "keyword"
+  },
+  "crit1": {
+    "type": "long"
+  },
+  "crit2": {
+    "type": "long"
+  },
+  "crit3": {
+    "type": "long"
+  },
+  "dbsource": {
+    "type": "keyword"
+  },
+  "divert": {
+    "type": "keyword"
+  },
+  "doubtterr": {
+    "type": "long"
+  },
+  "eventid": {
+    "type": "long"
+  },
+  "extended": {
+    "type": "long"
+  },
+  "gname": {
+    "type": "text"
+  },
+  "gname2": {
+    "type": "keyword"
+  },
+  "gsubname": {
+    "type": "keyword"
+  },
+  "guncertain1": {
+    "type": "long"
+  },
+  "guncertain2": {
+    "type": "long"
+  },
+  "hostkidoutcome": {
+    "type": "long"
+  },
+  "hostkidoutcome_txt": {
+    "type": "keyword"
+  },
+  "iday": {
+    "type": "long"
+  },
+  "imonth": {
+    "type": "long"
+  },
+  "individual": {
+    "type": "long"
+  },
+  "ishostkid": {
+    "type": "long"
+  },
+  "iyear": {
+    "type": "long"
+  },
+  "kidhijcountry": {
+    "type": "keyword"
+  },
+  "latitude": {
+    "type": "double"
+  },
+  "location": {
+    "type": "text"
+  },
+  "locgeo": {
+    "type": "geo_point", 
+    "ignore_malformed": true
+  },
+  "longitude": {
+    "type": "double"
+  },
+  "motive": {
+    "type": "text"
+  },
+  "multiple": {
+    "type": "long"
+  },
+  "natlty1": {
+    "type": "long"
+  },
+  "natlty1_txt": {
+    "type": "keyword"
+  },
+  "natlty2": {
+    "type": "long"
+  },
+  "natlty2_txt": {
+    "type": "keyword"
+  },
+  "ndays": {
+    "type": "long"
+  },
+  "nhostkid": {
+    "type": "long"
+  },
+  "nhostkidus": {
+    "type": "long"
+  },
+  "nhours": {
+    "type": "long"
+  },
+  "nkill": {
+    "type": "long"
+  },
+  "nkillter": {
+    "type": "long"
+  },
+  "nkillus": {
+    "type": "long"
+  },
+  "nperpcap": {
+    "type": "long"
+  },
+  "nperps": {
+    "type": "long"
+  },
+  "nreleased": {
+    "type": "long"
+  },
+  "nwound": {
+    "type": "long"
+  },
+  "nwoundte": {
+    "type": "long"
+  },
+  "nwoundus": {
+    "type": "long"
+  },
+  "propcomment": {
+    "type": "text"
+  },
+  "property": {
+    "type": "long"
+  },
+  "propextent": {
+    "type": "long"
+  },
+  "propextent_txt": {
+    "type": "text"
+  },
+  "propvalue": {
+    "type": "long"
+  },
+  "provstate": {
+    "type": "keyword"
+  },
+  "ransom": {
+    "type": "long"
+  },
+  "ransomamt": {
+    "type": "long"
+  },
+  "ransompaid": {
+    "type": "long"
+  },
+  "region": {
+    "type": "long"
+  },
+  "region_txt": {
+    "type": "keyword"
+  },
+  "related": {
+    "type": "keyword"
+  },
+  "resolution": {
+    "type": "date",
+    "format": "dd/MM/yyyy"
+  },
+  "scite1": {
+    "type": "text"
+  },
+  "scite2": {
+    "type": "text"
+  },
+  "scite3": {
+    "type": "text"
+  },
+  "specificity": {
+    "type": "long"
+  },
+  "success": {
+    "type": "long"
+  },
+  "suicide": {
+    "type": "long"
+  },
+  "summary": {
+    "type": "text"
+  },
+  "target1": {
+    "type": "text"
+  },
+  "target2": {
+    "type": "text"
+  },
+  "targsubtype1": {
+    "type": "long"
+  },
+  "targsubtype1_txt": {
+    "type": "text"
+  },
+  "targsubtype2": {
+    "type": "long"
+  },
+  "targsubtype2_txt": {
+    "type": "keyword"
+  },
+  "targtype1": {
+    "type": "long"
+  },
+  "targtype1_txt": {
+    "type": "keyword"
+  },
+  "targtype2": {
+    "type": "long"
+  },
+  "targtype2_txt": {
+    "type": "keyword"
+  },
+  "vicinity": {
+    "type": "long"
+  },
+  "weapdetail": {
+    "type": "text"
+  },
+  "weapsubtype1": {
+    "type": "long"
+  },
+  "weapsubtype1_txt": {
+    "type": "keyword"
+  },
+  "weapsubtype2": {
+    "type": "long"
+  },
+  "weapsubtype2_txt": {
+    "type": "keyword"
+  },
+  "weapsubtype3": {
+    "type": "long"
+  },
+  "weapsubtype3_txt": {
+    "type": "keyword"
+  },
+  "weaptype1": {
+    "type": "long"
+  },
+  "weaptype1_txt": {
+    "type": "keyword"
+  },
+  "weaptype2": {
+    "type": "long"
+  },
+  "weaptype2_txt": {
+    "type": "keyword"
+  }
+}

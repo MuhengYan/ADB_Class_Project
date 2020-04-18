@@ -1,0 +1,25 @@
+PUT _ingest/pipeline/logstashgtd_simple
+  {
+    "description" : "date field, location field, agg attack,target,weapon",
+    "processors" : [
+      {
+        "set" : {
+          "field" : "initial_date",
+          "value" : "{{iday}}/{{imonth}}/{{iyear}}"
+        }
+      },
+
+      {
+        "set" : {
+          "field" : "locgeo.lon",
+          "value" : "{{longitude}}"
+        }
+      },
+      {
+        "set" : {
+          "field" : "locgeo.lat",
+          "value" : "{{latitude}}"
+        }
+      }
+    ]
+  }

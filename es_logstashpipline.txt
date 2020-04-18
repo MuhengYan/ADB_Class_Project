@@ -1,0 +1,76 @@
+# csv to elasticsearch
+#parse csv
+#
+#assign type
+
+input {
+
+  file
+  {
+  start_position => "beginning"
+        path => "/home/silverml/Documents/adbProject/logstash/gtd_utf8_noh.csv"
+        mode => "read"
+        sincedb_path => "/home/silverml/Documents/adbProject/logstash/gtd_utf8_noh_sincedb"
+
+  }
+
+}
+
+filter {
+  csv
+  {
+        skip_empty_columns => true
+        columns => ["eventid","iyear","imonth","iday","approxdate","extended","resolution","country","country_txt","region","region_txt","provstate","city","latitude","longitude","specificity","vicinity","location","summary","crit1","crit2","crit3","doubtterr","alternative","alternative_txt","multiple","success","suicide","attacktype1","attacktype1_txt","attacktype2","attacktype2_txt","attacktype3","attacktype3_txt","targtype1","targtype1_txt","targsubtype1","targsubtype1_txt","corp1","target1","natlty1","natlty1_txt","targtype2","targtype2_txt","targsubtype2","targsubtype2_txt","corp2","target2","natlty2","natlty2_txt","targtype3","targtype3_txt","targsubtype3","targsubtype3_txt","corp3","target3","natlty3","natlty3_txt","gname","gsubname","gname2","gsubname2","gname3","gsubname3","motive","guncertain1","guncertain2","guncertain3","individual","nperps","nperpcap","claimed","claimmode","claimmode_txt","claim2","claimmode2","claimmode2_txt","claim3","claimmode3","claimmode3_txt","compclaim","weaptype1","weaptype1_txt","weapsubtype1","weapsubtype1_txt","weaptype2","weaptype2_txt","weapsubtype2","weapsubtype2_txt","weaptype3","weaptype3_txt","weapsubtype3","weapsubtype3_txt","weaptype4","weaptype4_txt","weapsubtype4","weapsubtype4_txt","weapdetail","nkill","nkillus","nkillter","nwound","nwoundus","nwoundte","property","propextent","propextent_txt","propvalue","propcomment","ishostkid","nhostkid","nhostkidus","nhours","ndays","divert","kidhijcountry","ransom","ransomamt","ransomamtus","ransompaid","ransompaidus","ransomnote","hostkidoutcome","hostkidoutcome_txt","nreleased","addnotes","scite1","scite2","scite3","dbsource","INT_LOG","INT_IDEO","INT_MISC","INT_ANY","related"]
+        convert =>
+        {
+                "eventid"=>"integer" "extended"=>"integer" "country"=>"integer" "region"=>"integer" "latitude"=>"float" "longitude"=>"float" "specificity"=>"integer" "vicinity"=>"integer" "crit1"=>"integer" "crit2"=>"integer" "crit3"=>"integer" "doubtterr"=>"integer" "alternative"=>"integer" "multiple"=>"integer" "success"=>"integer" "suicide"=>"integer" "attacktype1"=>"integer" "attacktype2"=>"integer" "attacktype3"=>"integer" "targtype1"=>"integer" "targsubtype1"=>"integer" "natlty1"=>"integer" "targtype2"=>"integer" "targsubtype2"=>"integer" "natlty2"=>"integer" "targtype3"=>"integer" "targsubtype3"=>"integer" "natlty3"=>"integer" "guncertain1"=>"integer" "guncertain2"=>"integer" "guncertain3"=>"integer" "individual"=>"integer" "nperps"=>"integer" "nperpcap"=>"integer" "claimed"=>"integer" "claimmode"=>"integer" "claim2"=>"integer" "claimmode2"=>"integer" "claim3"=>"integer" "claimmode3"=>"integer" "weaptype1"=>"integer" "weapsubtype1"=>"integer" "weaptype2"=>"integer" "weapsubtype2"=>"integer" "weaptype3"=>"integer" "weapsubtype3"=>"integer" "weaptype4"=>"integer" "weapsubtype4"=>"integer" "nkill"=>"integer" "nkillus"=>"integer" "nkillter"=>"integer" "nwound"=>"integer" "nwoundus"=>"integer" "nwoundte"=>"integer" "property"=>"integer" "propextent"=>"integer" "propvalue"=>"integer" "ishostkid"=>"integer" "nhostkid"=>"integer" "nhostkidus"=>"integer" "nhours"=>"integer" "ndays"=>"integer" "ransom"=>"integer" "ransomamt"=>"integer" "ransomamtus"=>"integer" "ransompaid"=>"integer" "ransompaidus"=>"integer" "hostkidoutcome"=>"integer" "nreleased"=>"integer"
+        }
+        remove_field => ["INT_LOG","INT_IDEO","INT_MISC","INT_ANY"]
+  }
+
+        if ![latitude]
+        {
+                mutate{add_field =>{"latitude" => "0.0" "longitude" => "0.0"}}
+                mutate{convert => {"latitude" => "float" "longitude" => "float"}}
+        }
+
+  if [iday] =="0"
+  {
+        if [imonth] =="0"
+        {
+                mutate{add_field =>{"testtime" => "%{[iyear]}"}}
+        }
+        else
+        {
+                mutate{add_field =>{"testtime" => "%{[imonth]}-%{[iyear]}"}}
+        }
+  }
+  else
+        {
+        mutate{add_field =>{"testtime" => "%{[iday]}-%{[imonth]}-%{[iyear]}"}}
+        }
+
+  date
+  {
+        match => ["testtime", "d-M-yyyy", "M-yyyy", "yyyy"]
+        remove_field => ["testtime", "message" ]
+  }
+
+}
+
+output {
+  elasticsearch{
+        hosts => ["http://localhost:9200"]
+        index => ["loggtd_full"]
+        manage_template => false
+        pipeline => "logstashgtd_simple"
+        }
+        stdout{codec => "dots"}
+
+
+
+        if"_dateparsefailure" in [tags]{
+                stdout{codec => "rubydebug"}
+        }
+  }
+
